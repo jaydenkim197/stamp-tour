@@ -5,11 +5,16 @@ import axios from "axios";
 import { MapContainer, TileLayer, Marker, Popup, Tooltip } from "react-leaflet";
 import L from "leaflet";
 import 'leaflet/dist/leaflet.css';
+import LoadingSpinner from "../../components/LoadingSpinner";
+import Toast from "../../components/Toast";
 
 const PlacesOnMap = () => {
   const { id } = useParams();
   const [station, setStation] = useState(null);
   const [places, setPlaces] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [toast, setToast] = useState(null);
   const navigate = useNavigate();
 
   // 1. 정류장 아이콘
@@ -37,21 +42,77 @@ const stampIcon = L.icon({
 });
 
   useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/getStations.php`)
-      .then((res) => {
-        const target = res.data.find((s) => s.id === parseInt(id));
-        setStation(target);
-      })
-      .catch((err) => console.error("정류장 정보 불러오기 실패:", err));
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
 
-    axios
-      .get(`${process.env.REACT_APP_API_BASE_URL}/getplaces_map.php?station_id=${id}`)
-      .then((res) => setPlaces(res.data))
-      .catch((err) => console.error("명소 정보 불러오기 실패:", err));
+        // 정류장 정보 가져오기
+        const stationRes = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/getStations.php`);
+        const target = stationRes.data.find((s) => s.id === parseInt(id));
+        
+        if (!target) {
+          throw new Error('정류장을 찾을 수 없습니다.');
+        }
+        setStation(target);
+
+        // 명소 정보 가져오기
+        const placesRes = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/getplaces_map.php?station_id=${id}`);
+        setPlaces(placesRes.data);
+
+      } catch (err) {
+        console.error("데이터 불러오기 실패:", err);
+        setError(err.message || '데이터를 불러오는 중 오류가 발생했습니다.');
+        setToast({
+          message: err.message || '데이터를 불러오는 중 오류가 발생했습니다.',
+          type: 'error'
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchData();
+    }
   }, [id]);
 
-  if (!station) return <div className="p-4">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="p-4">
+        <LoadingSpinner size="large" text="지도와 명소 정보를 불러오는 중..." />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 text-center">
+        <h2 className="text-xl font-bold text-red-600 mb-4">오류 발생</h2>
+        <p className="text-gray-600 mb-4">{error}</p>
+        <button
+          onClick={() => window.location.reload()}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          다시 시도
+        </button>
+      </div>
+    );
+  }
+
+  if (!station) {
+    return (
+      <div className="p-4 text-center">
+        <h2 className="text-xl font-bold text-gray-600 mb-4">정류장을 찾을 수 없습니다</h2>
+        <button
+          onClick={() => navigate('/stations')}
+          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+        >
+          정류장 목록으로 돌아가기
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="p-4">
@@ -102,6 +163,15 @@ const stampIcon = L.icon({
           </Marker>
         ))}
       </MapContainer>
+
+      {/* 토스트 알림 */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          onClose={() => setToast(null)}
+        />
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import 'leaflet/dist/leaflet.css';
+import { LanguageProvider } from "./i18n/LanguageContext";
 import Navbar from "./components/Navbar";
 import MainPage from "./pages/MainPage/mainpage";
 import MyPage from "./pages/MyPage/mypage";
@@ -19,25 +20,27 @@ import RouteRecommendation from './pages/RouteRecommendation/RouteRecommendation
 
 function App() {
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<MainPage />} />
-        <Route path="/my-page" element={<MyPage />} />
-        <Route path="/stations" element={<StationList />} />
-        <Route path="/stations/:id" element={<PlacesList />} />
-        <Route path="/places_on_map/:id" element={<PlacesOnMap />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<LoginPage />}/>
-        <Route path="/place/:id" element={<PlaceDetail />} />
-        <Route path="/place/:id/post_review" element={<PlaceReviewForm />} />
-        <Route path="/review/:id" element={<ReviewDetail />} />
-        <Route path="/stamp/:place_id" element={<StampPage />} />
-        <Route path="/ranking" element={<StampRanking />} />
-        <Route path="/latest-reviews" element={<LatestReviewsPage />} />
-        <Route path="/route-recommendation" element={<RouteRecommendation />} />
-      </Routes>
-    </Router>
+    <LanguageProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/my-page" element={<MyPage />} />
+          <Route path="/stations" element={<StationList />} />
+          <Route path="/stations/:id" element={<PlacesList />} />
+          <Route path="/places_on_map/:id" element={<PlacesOnMap />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<LoginPage />}/>
+          <Route path="/place/:id" element={<PlaceDetail />} />
+          <Route path="/place/:id/post_review" element={<PlaceReviewForm />} />
+          <Route path="/review/:id" element={<ReviewDetail />} />
+          <Route path="/stamp/:place_id" element={<StampPage />} />
+          <Route path="/ranking" element={<StampRanking />} />
+          <Route path="/latest-reviews" element={<LatestReviewsPage />} />
+          <Route path="/route-recommendation" element={<RouteRecommendation />} />
+        </Routes>
+      </Router>
+    </LanguageProvider>
   );
 }
 
