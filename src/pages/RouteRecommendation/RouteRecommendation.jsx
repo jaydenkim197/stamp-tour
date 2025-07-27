@@ -18,6 +18,26 @@ const RouteRecommendation = () => {
   const [showLoading, setShowLoading] = useState(false);
   const [showRecommendBtn, setShowRecommendBtn] = useState(false);
   const [loadingDone, setLoadingDone] = useState(false);
+  const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+  const [locationStatus, setLocationStatus] = useState('pending'); // 'pending' | 'success' | 'error'
+
+  React.useEffect(() => {
+    if (!('geolocation' in navigator)) {
+      setLocationStatus('error');
+      return;
+    }
+    setLocationStatus('pending');
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setLocationStatus('success');
+      },
+      (err) => {
+        setLocationStatus('error');
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, []);
 
   const interestOptions = [
     { id: 'culture', label: '문화/예술', icon: '🎨' },
@@ -72,10 +92,16 @@ const RouteRecommendation = () => {
   const getRecommendation = async () => {
     setLoading(true);
     try {
-      // interests 배열이 여러 개일 수 있으므로, 우선 첫 번째만 사용 (백엔드 확장 시 배열 전달 가능)
+      if (locationStatus !== 'success') {
+        alert('현재 위치 정보를 받아올 수 없습니다. 위치 권한을 허용해 주세요.');
+        setLoading(false);
+        return;
+      }
       const data = await fetchRouteRecommendation({
         interest: formData.interests[0] || "관광",
-        time: formData.duration || "오전"
+        time: formData.duration || "오전",
+        latitude: userLocation.lat,
+        longitude: userLocation.lng
       });
       if (data.success) {
         setRecommendation(data);
@@ -213,18 +239,18 @@ const RouteRecommendation = () => {
   const renderRecommendation = () => {
     if (!recommendation) return null;
 
-    const { route, summary, story } = recommendation;
+    const { route, summary, story, detailed_story } = recommendation;
     const totalHours = Math.floor(summary.total_time / 60);
     const totalMinutes = summary.total_time % 60;
 
-    // story를 줄 단위로 분리
-    const storyLines = (story || "").split(/\n|\r|<br\s*\/?\s*>/);
+    // detailed_story가 있으면 사용, 없으면 기존 story 사용
+    const displayStory = detailed_story || story || "";
+    const storyLines = displayStory.split(/\n|\r|<br\s*\/?\s*>/);
 
     return (
       <div className="recommendation-container">
         <h2>🚀 추천 루트</h2>
 
-        {/* story 전체는 위에서 제거 */}
         <div className="route-summary">
           <div className="summary-item">
             <span className="summary-icon">⏱️</span>
@@ -248,18 +274,34 @@ const RouteRecommendation = () => {
                 <h3>{place.name}</h3>
                 <p>{place.description}</p>
                 <div className="place-meta">
-                  <span>⭐ {place.average_rating}</span>
+                  <span>🏷️ {place.type}</span>
                   <span>⏱️ {place.estimated_time || 60}분</span>
                   {place.is_stampPlace === 1 && <span>🎖️ 스탬프</span>}
                 </div>
-                {/* 각 장소별 Gemini 설명 줄 표시 (진한 글씨, 검정색) */}
-                <div style={{ color: '#222', fontWeight: 500, marginTop: 8 }}>
-                  {storyLines.find(line => line.trim().startsWith(`${index + 1}.`))}
+                {/* 각 장소별 상세 설명 표시 */}
+                <div style={{ color: '#222', fontWeight: 500, marginTop: 8, fontSize: '14px', lineHeight: '1.4' }}>
+                  {storyLines.find(line => line.trim().startsWith(`${index + 1}.`)) || 
+                   storyLines.find(line => line.includes(place.name))}
                 </div>
               </div>
             </div>
           ))}
         </div>
+
+        {/* 전체 경로 상세 설명 */}
+        {detailed_story && (
+          <div className="detailed-story" style={{ 
+            background: '#f8f9fa', 
+            padding: '20px', 
+            borderRadius: '12px', 
+            marginTop: '20px',
+            fontSize: '14px',
+            lineHeight: '1.6'
+          }}>
+            <h3 style={{ marginBottom: '15px', color: '#333' }}>📖 상세 여행 가이드</h3>
+            <div style={{ whiteSpace: 'pre-line' }}>{detailed_story}</div>
+          </div>
+        )}
 
         <div className="action-buttons">
           <button onClick={() => navigate('/stations')} className="btn-primary">
@@ -290,6 +332,12 @@ const RouteRecommendation = () => {
       </div>
 
       <div className="content">
+        {locationStatus === 'pending' && (
+          <div style={{ color: '#888', marginBottom: 8 }}>📡 현재 위치를 불러오는 중...</div>
+        )}
+        {locationStatus === 'error' && (
+          <div style={{ color: 'red', marginBottom: 8 }}>⚠️ 위치 권한이 거부되었거나 위치 정보를 가져올 수 없습니다.</div>
+        )}
         {recommendation ? renderRecommendation() : renderStep()}
       </div>
 

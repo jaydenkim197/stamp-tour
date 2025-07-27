@@ -21,11 +21,11 @@ export const fetchPlacesByStationId = async (stationId) => {
   }
 };
 
-export const fetchRouteRecommendation = async ({ interest, time }) => {
+export const fetchRouteRecommendation = async ({ interest, time, latitude, longitude }) => {
   try {
     const res = await axios.post(
       `${process.env.REACT_APP_API_BASE_URL}/getRouteRecommendation.php`,
-      { interest, time }
+      { interest, time, latitude, longitude }
     );
     return res.data;
   } catch (err) {
