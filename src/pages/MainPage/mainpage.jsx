@@ -44,13 +44,20 @@ const MainPage = () => {
 
   return (
     <div className="mainpage-modern">
-      {/* 스탬프 이미지 - 우상단 구석 */}
+      {/* 올바른 스탬프 디자인 - 우상단 구석 */}
       <div className="stamp-decoration">
-        <img 
-          src="/img/stamp_pin.png" 
-          alt="Melbourne Tram Stamp" 
-          className="stamp-image"
-        />
+        <div className="stamp-circle">
+          <div className="stamp-content">
+            <div className="kangaroo-tram">
+              <div className="kangaroo"></div>
+              <div className="tram"></div>
+            </div>
+            <div className="stamp-text">
+              <span className="stamp-top">VISITED BY TRAM</span>
+              <span className="stamp-bottom">AUSTRALIA</span>
+            </div>
+          </div>
+        </div>
       </div>
       
       <header className="main-header">
