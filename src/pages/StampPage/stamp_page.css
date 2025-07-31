@@ -1,0 +1,262 @@
+.stamp-page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.stamp-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.stamp-card {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.stamp-design {
+  margin-bottom: 30px;
+}
+
+.stamp-circle {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border: 8px solid #8B4513;
+  border-radius: 50%;
+  background: #F5F5DC;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 16px rgba(139, 69, 19, 0.3);
+}
+
+.stamp-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.kangaroo-tram {
+  position: relative;
+  width: 80px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.kangaroo {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 50px;
+  background: #8B4513;
+  border-radius: 20px 20px 0 0;
+}
+
+.kangaroo::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 20px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+.kangaroo::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 20px;
+  background: #8B4513;
+  border-radius: 10px;
+}
+
+.tram {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 25px;
+  background: #8B4513;
+  border-radius: 5px;
+}
+
+.tram::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 8px;
+  background: #8B4513;
+  border-radius: 2px;
+}
+
+.tram::after {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  background: #F5F5DC;
+  border-radius: 50%;
+}
+
+.stamp-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #8B4513;
+}
+
+.stamp-top {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.stamp-bottom {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.stamp-message {
+  margin-bottom: 30px;
+}
+
+.stamp-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.stamp-status {
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  margin-bottom: 20px;
+}
+
+.stamp-status.new {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.stamp-status.exists {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.stamp-status.error {
+  background: linear-gradient(135deg, #f44336, #d32f2f);
+  color: white;
+}
+
+.stamp-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.stamp-button {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+}
+
+.stamp-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.3);
+}
+
+.stamp-button.secondary {
+  background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.stamp-button.secondary:hover {
+  box-shadow: 0 8px 16px rgba(240, 147, 251, 0.3);
+}
+
+/* 애니메이션 효과 */
+@keyframes stampPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.stamp-circle {
+  animation: stampPulse 2s ease-in-out infinite;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+  .stamp-card {
+    padding: 20px;
+  }
+  
+  .stamp-circle {
+    width: 150px;
+    height: 150px;
+  }
+  
+  .kangaroo-tram {
+    width: 60px;
+    height: 45px;
+  }
+  
+  .kangaroo {
+    width: 30px;
+    height: 35px;
+  }
+  
+  .tram {
+    width: 45px;
+    height: 20px;
+  }
+  
+  .stamp-top {
+    font-size: 10px;
+  }
+  
+  .stamp-bottom {
+    font-size: 12px;
+  }
+} 

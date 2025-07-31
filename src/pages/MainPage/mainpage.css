@@ -4,6 +4,34 @@
   color: white;
   padding: 0;
   margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 스탬프 장식 이미지 */
+.stamp-decoration {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.stamp-image {
+  width: 120px;
+  height: auto;
+  opacity: 0.8;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
 }
 
 .mainpage-loading {
@@ -181,6 +209,15 @@
 
 /* 모바일 최적화 */
 @media (max-width: 768px) {
+  .stamp-decoration {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .stamp-image {
+    width: 80px;
+  }
+  
   .main-header {
     padding: 1rem;
     flex-direction: column;

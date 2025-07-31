@@ -38,78 +38,29 @@
 }
 
 .navbar-menu {
-  display: flex;
-  gap: 24px;
-  align-items: center;
+  display: none; /* 모바일에서는 숨김 */
 }
 
 .navbar-link {
-  color: #666;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 12px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  min-height: 44px;
-}
-
-.navbar-link:hover {
-  color: #3498db;
-  background-color: #f8fafc;
+  display: none; /* 모바일에서는 숨김 */
 }
 
 .navbar-auth {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.user-menu {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.signup-btn {
-  background-color: #3498db;
-  color: white !important;
-  padding: 8px 16px;
-  border-radius: 6px;
-}
-
-.signup-btn:hover {
-  background-color: #2980b9;
-  color: white !important;
-}
-
-.logout-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  font-size: inherit;
+  display: none; /* 모바일에서는 숨김 */
 }
 
 .mobile-menu-btn {
-  display: none;
+  display: flex;
   background: none;
   border: none;
   cursor: pointer;
   padding: 8px;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
 }
 
 .hamburger {
-  width: 24px;
+  width: 20px;
   height: 2px;
   background-color: #333;
   transition: all 0.3s ease;
@@ -118,7 +69,7 @@
 .hamburger::before,
 .hamburger::after {
   content: '';
-  width: 24px;
+  width: 20px;
   height: 2px;
   background-color: #333;
   position: absolute;
@@ -126,41 +77,120 @@
 }
 
 .hamburger::before {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
 }
 
 .hamburger::after {
-  transform: translateY(8px);
+  transform: translateY(6px);
 }
 
-.mobile-menu {
-  display: none;
-  flex-direction: column;
-  background-color: white;
-  border-top: 1px solid #e5e7eb;
-  padding: 16px;
-  gap: 12px;
-}
-
-.mobile-menu.open {
+/* 모바일 메뉴 오버레이 */
+.mobile-menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 2000;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobile-menu-content {
+  background-color: white;
+  border-radius: 16px;
+  padding: 24px;
+  width: 90%;
+  max-width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.mobile-menu-header h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
+
+.close-menu-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-menu-btn:hover {
+  background-color: #f3f4f6;
+}
+
+.mobile-menu-links {
+  margin-bottom: 24px;
+}
+
+.mobile-menu-auth {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 16px;
 }
 
 .mobile-link {
-  color: #666;
-  text-decoration: none;
-  font-weight: 500;
-  padding: 12px 16px;
-  border-radius: 6px;
-  transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  min-height: 44px;
+  color: #333;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 16px 0;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-size: 16px;
+  gap: 12px;
 }
 
 .mobile-link:hover {
   color: #3498db;
   background-color: #f8fafc;
+  padding-left: 12px;
+}
+
+.mobile-link.signup-link {
+  background-color: #3498db;
+  color: white;
+  padding: 12px 16px;
+  margin-top: 8px;
+  border-radius: 8px;
+  text-align: center;
+  justify-content: center;
+}
+
+.mobile-link.signup-link:hover {
+  background-color: #2980b9;
+  color: white;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
 }
 
 /* 모바일 최적화 */
@@ -174,35 +204,43 @@
     font-size: 18px;
   }
   
-  .navbar-menu {
-    display: none;
-  }
-  
-  .navbar-auth {
-    display: none;
-  }
-  
   .mobile-menu-btn {
-    display: flex;
-  }
-  
-  .mobile-menu {
-    display: none;
-  }
-  
-  .mobile-menu.open {
     display: flex;
   }
 }
 
-/* 태블릿 */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* 태블릿 이상에서는 데스크톱 메뉴 표시 */
+@media (min-width: 769px) {
   .navbar-menu {
+    display: flex;
     gap: 16px;
+    align-items: center;
   }
   
   .navbar-link {
-    padding: 6px 10px;
-    font-size: 14px;
+    display: flex;
+    color: #666;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    align-items: center;
+    min-height: 44px;
+  }
+  
+  .navbar-link:hover {
+    color: #3498db;
+    background-color: #f8fafc;
+  }
+  
+  .navbar-auth {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .mobile-menu-btn {
+    display: none;
   }
 }

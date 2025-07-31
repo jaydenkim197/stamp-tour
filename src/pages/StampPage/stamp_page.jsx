@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './stamp_page.css';
 
 const StampPage = () => {
   const { place_id } = useParams();
   const navigate = useNavigate();
   const [message, setMessage] = useState('스탬프 확인 중...');
+  const [stampType, setStampType] = useState('new'); // 'new', 'exists', 'error'
 
   useEffect(() => {
     const checkAndAddStamp = async () => {
@@ -30,19 +32,23 @@ const StampPage = () => {
 
         if (res.data.status === 'new') {
           setMessage('🎉 스탬프를 획득하셨습니다!');
+          setStampType('new');
           setTimeout(() => {
             navigate(`/place/${place_id}`);
           }, 5000);
         } else if (res.data.status === 'exists') {
           setMessage('✅ 이미 스탬프를 획득하셨습니다!');
+          setStampType('exists');
           setTimeout(() => {
             navigate(`/place/${place_id}`);
           }, 5000);
         } else {
           setMessage('⚠️ 오류가 발생했습니다. 다시 시도해주세요.');
+          setStampType('error');
         }
       } catch (error) {
         setMessage('❌ 서버 오류입니다.');
+        setStampType('error');
         console.error(error);
       }
     };
@@ -53,15 +59,45 @@ const StampPage = () => {
   }, [place_id, navigate]);
 
   return (
-    <div className="p-6 text-center">
-      <h1 className="text-3xl font-bold text-green-600 mb-4">🏅 스탬프 페이지</h1>
-      <p className="text-gray-700 mb-6">{message}</p>
-      <button
-        onClick={() => navigate(`/place/${place_id}`)}
-        className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-      >
-        바로 돌아가기
-      </button>
+    <div className="stamp-page">
+      <div className="stamp-container">
+        <div className="stamp-card">
+          <div className="stamp-design">
+            <div className="stamp-circle">
+              <div className="stamp-content">
+                <div className="kangaroo-tram">
+                  <div className="kangaroo"></div>
+                  <div className="tram"></div>
+                </div>
+                <div className="stamp-text">
+                  <span className="stamp-top">VISITED BY TRAM</span>
+                  <span className="stamp-bottom">AUSTRALIA</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="stamp-message">
+            <h1 className="stamp-title">🏅 스탬프 획득</h1>
+            <p className={`stamp-status ${stampType}`}>{message}</p>
+          </div>
+          
+          <div className="stamp-actions">
+            <button
+              onClick={() => navigate(`/place/${place_id}`)}
+              className="stamp-button"
+            >
+              바로 돌아가기
+            </button>
+            <button
+              onClick={() => navigate('/stamp-ranking')}
+              className="stamp-button secondary"
+            >
+              스탬프 랭킹 보기
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

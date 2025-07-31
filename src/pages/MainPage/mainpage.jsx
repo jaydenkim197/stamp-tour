@@ -44,6 +44,15 @@ const MainPage = () => {
 
   return (
     <div className="mainpage-modern">
+      {/* 스탬프 이미지 - 우상단 구석 */}
+      <div className="stamp-decoration">
+        <img 
+          src="/img/stamp_pin.png" 
+          alt="Melbourne Tram Stamp" 
+          className="stamp-image"
+        />
+      </div>
+      
       <header className="main-header">
         <span className="main-logo">🚋</span>
         <span className="main-title">{t('mainTitle')}</span>

@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './ReviewDetail.css';
 
 const ReviewDetail = () => {
   const { id } = useParams(); // review_id
+  const navigate = useNavigate();
   const [review, setReview] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState('');
   const [currentUserId, setCurrentUserId] = useState(null); // ✅ 로그인 사용자 ID
+  const [loading, setLoading] = useState(true);
 
   // ✅ 로그인 사용자 확인
   useEffect(() => {
@@ -22,13 +25,23 @@ const ReviewDetail = () => {
   }, []);
 
   useEffect(() => {
-    axios.get(`${process.env.REACT_APP_API_BASE_URL}/getReviewById.php?review_id=${id}`)
-      .then(res => setReview(res.data))
-      .catch(err => console.error('후기 정보 오류:', err));
+    const fetchData = async () => {
+      try {
+        const [reviewRes, commentsRes] = await Promise.all([
+          axios.get(`${process.env.REACT_APP_API_BASE_URL}/getReviewById.php?review_id=${id}`),
+          axios.get(`${process.env.REACT_APP_API_BASE_URL}/getComments.php?review_id=${id}`)
+        ]);
+        
+        setReview(reviewRes.data);
+        setComments(commentsRes.data);
+      } catch (err) {
+        console.error('데이터 로딩 오류:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    axios.get(`${process.env.REACT_APP_API_BASE_URL}/getComments.php?review_id=${id}`)
-      .then(res => setComments(res.data))
-      .catch(err => console.error('댓글 정보 오류:', err));
+    fetchData();
   }, [id]);
 
   const handleSubmitComment = () => {
@@ -47,6 +60,10 @@ const ReviewDetail = () => {
       } else {
         alert(res.data.message || '댓글 등록 실패');
       }
+    })
+    .catch(err => {
+      console.error('댓글 등록 오류:', err);
+      alert('댓글 등록 중 오류가 발생했습니다.');
     });
   };
 
@@ -62,65 +79,114 @@ const ReviewDetail = () => {
       } else {
         alert(res.data.message || '삭제 실패');
       }
+    })
+    .catch(err => {
+      console.error('댓글 삭제 오류:', err);
+      alert('댓글 삭제 중 오류가 발생했습니다.');
     });
   };
 
-  if (!review) return <div className="p-4">Loading...</div>;
+  if (loading) {
+    return (
+      <div className="review-detail-loading">
+        <div className="loading-spinner"></div>
+        <p>후기 정보를 불러오는 중...</p>
+      </div>
+    );
+  }
+
+  if (!review) {
+    return (
+      <div className="review-detail-error">
+        <h2>❌ 후기를 찾을 수 없습니다</h2>
+        <button onClick={() => navigate(-1)} className="back-button">
+          뒤로 가기
+        </button>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">📝 후기 상세</h1>
-
-      <div className="bg-white border rounded p-4 shadow-sm mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <div className="font-semibold text-gray-800">{review.username || '익명'}</div>
-          <div className="text-sm text-gray-500">{review.created_at}</div>
+    <div className="review-detail-page">
+      <div className="review-detail-container">
+        <div className="review-detail-header">
+          <button onClick={() => navigate(-1)} className="back-button">
+            ← 뒤로 가기
+          </button>
+          <h1 className="review-detail-title">📝 후기 상세</h1>
         </div>
-        <div className="text-yellow-500 mb-2">⭐ {review.rating}</div>
-        <div className="text-gray-900 whitespace-pre-line mb-2">{review.content}</div>
-        {review.image_full_url && (
-          <img
-            src={review.image_full_url}
-            alt="후기 이미지"
-            className="mt-2 max-h-96 w-full object-cover rounded"
-          />
-        )}
 
-      </div>
+        <div className="review-detail-card">
+          <div className="review-detail-info">
+            <div className="review-author">
+              <span className="author-name">{review.username || '익명'}</span>
+              <span className="review-date">{review.created_at}</span>
+            </div>
+            <div className="review-rating">
+              {'⭐'.repeat(review.rating)}
+              <span className="rating-text">{review.rating}점</span>
+            </div>
+          </div>
+          
+          <div className="review-content">
+            {review.content}
+          </div>
+          
+          {review.image_full_url && (
+            <div className="review-image-container">
+              <img
+                src={review.image_full_url}
+                alt="후기 이미지"
+                className="review-image"
+              />
+            </div>
+          )}
+        </div>
 
-      <h2 className="text-lg font-semibold mb-2">💬 댓글</h2>
-      <div className="space-y-2 mb-4">
-        {comments.map(comment => (
-          <div key={comment.id} className="text-sm flex justify-between items-center border-b pb-1">
-            <span>
-              💬 <strong>{comment.username || '익명'}:</strong> {comment.content}
-            </span>
-            {comment.user_id === currentUserId && (
-              <button
-                onClick={() => handleDeleteComment(comment.id)}
-                className="text-xs text-red-500 hover:underline"
-              >
-                삭제
-              </button>
+        <div className="comments-section">
+          <h2 className="comments-title">💬 댓글</h2>
+          
+          <div className="comments-list">
+            {comments.length === 0 ? (
+              <p className="no-comments">아직 댓글이 없습니다.</p>
+            ) : (
+              comments.map(comment => (
+                <div key={comment.id} className="comment-item">
+                  <div className="comment-content">
+                    <span className="comment-author">{comment.username || '익명'}</span>
+                    <span className="comment-text">{comment.content}</span>
+                  </div>
+                  {comment.user_id === currentUserId && (
+                    <button
+                      onClick={() => handleDeleteComment(comment.id)}
+                      className="delete-comment-btn"
+                    >
+                      삭제
+                    </button>
+                  )}
+                </div>
+              ))
             )}
           </div>
-        ))}
-      </div>
 
-      <div className="mt-4">
-        <input
-          type="text"
-          placeholder="댓글을 입력하세요"
-          className="w-full border p-2 rounded text-sm"
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-        />
-        <button
-          onClick={handleSubmitComment}
-          className="mt-2 px-4 py-2 bg-gray-800 text-white rounded hover:bg-gray-700"
-        >
-          댓글 등록
-        </button>
+          <div className="comment-form">
+            <input
+              type="text"
+              placeholder="댓글을 입력하세요"
+              className="comment-input"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSubmitComment()}
+            />
+            <button
+              onClick={handleSubmitComment}
+              className="comment-submit-btn"
+              disabled={!newComment.trim()}
+            >
+              댓글 등록
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

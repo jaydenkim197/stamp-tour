@@ -181,9 +181,52 @@ const PlacesOnMap = () => {
   }, [stationId, navigate]);
 
   return (
-    <div>
-      <h2 className="text-xl font-bold mb-4 px-4 pt-4">🗺️ 명소 지도 보기</h2>
-      <div id="map" ref={mapRef} style={{ height: '90vh', width: '100%' }} />
+    <div style={{ height: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <div style={{ 
+        padding: '16px', 
+        backgroundColor: 'white', 
+        borderBottom: '1px solid #e5e7eb',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '12px'
+      }}>
+        <button 
+          onClick={() => navigate(-1)}
+          style={{
+            background: 'none',
+            border: 'none',
+            fontSize: '20px',
+            cursor: 'pointer',
+            padding: '8px',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minWidth: '40px',
+            height: '40px'
+          }}
+          onMouseEnter={(e) => e.target.style.backgroundColor = '#f3f4f6'}
+          onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+        >
+          ←
+        </button>
+        <h2 style={{ 
+          margin: 0, 
+          fontSize: '18px', 
+          fontWeight: 'bold',
+          flex: 1
+        }}>
+          🗺️ 명소 지도 보기
+        </h2>
+      </div>
+      <div 
+        id="map" 
+        ref={mapRef} 
+        style={{ 
+          flex: 1, 
+          width: '100%' 
+        }} 
+      />
     </div>
   );
 };
