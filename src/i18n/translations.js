@@ -110,7 +110,118 @@ export const translations = {
     // 활동 강도
     easy: '쉬운 (걷기 최소화)',
     normal: '보통 (적당한 걷기)',
-    challenging: '도전적 (많은 걷기)'
+    challenging: '도전적 (많은 걷기)',
+    
+    // 트램 존 관련
+    tramZones: '트램 요금 구간',
+    freeTramZone: 'Free Tram Zone (무료)',
+    zone1: 'Zone 1 (유료)',
+    zone2: 'Zone 2 (유료)',
+    tramRoutes: '트램 노선',
+    route35: '노선 35',
+    route96: '노선 96',
+    route86: '노선 86',
+    
+    // 필터 관련
+    tramZonesFilter: '트램 존 (무료/유료 구간)',
+    tramRoutesFilter: '노선도',
+    touristSpotsFilter: '관광지',
+    stationsFilter: '정류장',
+    stampPlacesFilter: '스탬프 명소',
+    landmarksFilter: '랜드마크',
+    
+    // 지도 관련
+    freeTramZoneTooltip: 'Free Tram Zone (무료 구간)',
+    zone1Tooltip: 'Zone 1 (유료 구간)',
+    zone2Tooltip: 'Zone 2 (유료 구간)',
+    routeTooltip: '노선',
+    
+    // 추가 지도 관련
+    tramFeeSection: '트램 요금 구간',
+    freeZone: 'Free Tram Zone (무료)',
+    zone1: 'Zone 1 (유료)',
+    zone2: 'Zone 2 (유료)',
+    tramRoutes: '트램 노선',
+    line35: '노선 35',
+    line96: '노선 96',
+    line86: '노선 86',
+    line: '노선',
+    
+    // 필터 관련
+    tramStationMap: '트램 정류장 지도 보기',
+    mapFilters: '지도 필터',
+    tramZone: '트램 존',
+    stations: '정류장',
+    stampPlaces: '스탬프 명소',
+    landmarks: '랜드마크',
+    
+    // 툴팁 관련
+    stampPlace: '스탬프 명소',
+    stampPlaceTooltip: '스탬프 명소',
+    landmarkTooltip: '🏛️ {type}',
+    
+    // 정류장 이름
+    flindersStreetStation: 'Flinders Street Station',
+    southernCrossStation: 'Southern Cross Station',
+    marvelStadium: 'Marvel Stadium',
+    docklands: 'Docklands',
+    melbourneCentral: 'Melbourne Central',
+    parliament: 'Parliament',
+    flagstaffGardens: 'Flagstaff Gardens',
+    carltonGardens: 'Carlton Gardens',
+    bourkeStreetMall: 'Bourke Street Mall',
+    collinsStreet: 'Collins Street',
+    swanstonStreet: 'Swanston Street',
+    elizabethStreet: 'Elizabeth Street',
+    queenVictoriaMarket: 'Queen Victoria Market',
+    royalExhibitionBuilding: 'Royal Exhibition Building',
+    melbourneCricketGround: 'Melbourne Cricket Ground',
+    stKildaBeach: 'St Kilda Beach',
+    
+    // 35번 City Circle Tram 정류장 (실제 데이터)
+    waterfrontCity: 'Waterfront City / Docklands Drive',
+    newQuayProm: 'New Quay Promenade / Docklands Drive',
+    centralPier: 'Central Pier / Harbour Esplanade',
+    bourkeStHarbour: 'Bourke Street / Harbour Esplanade',
+    etihadStadium: 'Etihad Stadium / La Trobe Street',
+    docklandsPark: 'Docklands Park / Harbour Esplanade',
+    goodsShed: 'The Goods Shed / Wurundjeri Way',
+    spencerStFlinders: 'Spencer Street / Flinders Street',
+    melbourneAquarium: 'Melbourne Aquarium / Flinders Street',
+    marketStFlinders: 'Market Street / Flinders Street',
+    elizabethStFlinders: 'Elizabeth Street / Flinders Street',
+    swanstonStFlinders: 'Swanston Street / Flinders Street',
+    russellStFlinders: 'Russell Street / Flinders Street',
+    springStFlinders: 'Spring Street / Flinders Street',
+    albertStNicholson: 'Albert Street / Nicholson Street',
+    nicholsonStVictoria: 'Nicholson Street / Victoria Parade',
+    victoriaStLaTrobe: 'Victoria Street / La Trobe Street',
+    exhibitionStLaTrobe: 'Exhibition Street / La Trobe Street',
+    russellStLaTrobe: 'Russell Street / La Trobe Street',
+    swanstonStLaTrobe: 'Swanston Street / La Trobe Street',
+    elizabethStLaTrobe: 'Elizabeth Street / La Trobe Street',
+    queenStLaTrobe: 'Queen Street / La Trobe Street',
+    williamStLaTrobe: 'William Street / La Trobe Street',
+    kingStLaTrobe: 'King Street / La Trobe Street',
+    spencerStLaTrobe: 'Spencer Street / La Trobe Street',
+    parliamentCollins: 'Parliament / Collins Street',
+    exhibitionStFlinders: 'Exhibition Street / Flinders Street',
+    victoriaPoliceCentre: 'Victoria Police Centre / Flinders Street',
+    
+    // 기타 정류장 이름
+    southernCrossStation: 'Southern Cross Station',
+    marvelStadium: 'Marvel Stadium',
+    parliament: 'Parliament',
+    flagstaffGardens: 'Flagstaff Gardens',
+    carltonGardens: 'Carlton Gardens',
+    bourkeStreetMall: 'Bourke Street Mall',
+    collinsStreet: 'Collins Street',
+    swanstonStreet: 'Swanston Street',
+    elizabethStreet: 'Elizabeth Street',
+    queenVictoriaMarket: 'Queen Victoria Market',
+    royalExhibitionBuilding: 'Royal Exhibition Building',
+    melbourneCricketGround: 'Melbourne Cricket Ground',
+    stKildaBeach: 'St Kilda Beach'
   },
   
   en: {
@@ -223,6 +334,117 @@ export const translations = {
     // Activity level
     easy: 'Easy (Minimal walking)',
     normal: 'Normal (Moderate walking)',
-    challenging: 'Challenging (Lots of walking)'
+    challenging: 'Challenging (Lots of walking)',
+    
+    // Tram zones
+    tramZones: 'Tram Fare Zones',
+    freeTramZone: 'Free Tram Zone (Free)',
+    zone1: 'Zone 1 (Paid)',
+    zone2: 'Zone 2 (Paid)',
+    tramRoutes: 'Tram Routes',
+    route35: 'Route 35',
+    route96: 'Route 96',
+    route86: 'Route 86',
+    
+    // Filters
+    tramZonesFilter: 'Tram Zones (Free/Paid)',
+    tramRoutesFilter: 'Routes',
+    touristSpotsFilter: 'Tourist Spots',
+    stationsFilter: 'Stations',
+    stampPlacesFilter: 'Stamp Places',
+    landmarksFilter: 'Landmarks',
+    
+    // Map related
+    freeTramZoneTooltip: 'Free Tram Zone (Free)',
+    zone1Tooltip: 'Zone 1 (Paid)',
+    zone2Tooltip: 'Zone 2 (Paid)',
+    routeTooltip: 'Route',
+    
+    // 추가 지도 관련
+    tramFeeSection: 'Tram Fare Zones',
+    freeZone: 'Free Tram Zone (Free)',
+    zone1: 'Zone 1 (Paid)',
+    zone2: 'Zone 2 (Paid)',
+    tramRoutes: 'Tram Routes',
+    line35: 'Route 35',
+    line96: 'Route 96',
+    line86: 'Route 86',
+    line: 'Route',
+    
+    // 필터 관련
+    tramStationMap: 'Tram Station Map View',
+    mapFilters: 'Map Filters',
+    tramZone: 'Tram Zone',
+    stations: 'Stations',
+    stampPlaces: 'Stamp Places',
+    landmarks: 'Landmarks',
+    
+    // 툴팁 관련
+    stampPlace: 'Stamp Place',
+    stampPlaceTooltip: 'Stamp Place',
+    landmarkTooltip: '🏛️ {type}',
+    
+    // Station names
+    flindersStreetStation: 'Flinders Street Station',
+    southernCrossStation: 'Southern Cross Station',
+    marvelStadium: 'Marvel Stadium',
+    docklands: 'Docklands',
+    melbourneCentral: 'Melbourne Central',
+    parliament: 'Parliament',
+    flagstaffGardens: 'Flagstaff Gardens',
+    carltonGardens: 'Carlton Gardens',
+    bourkeStreetMall: 'Bourke Street Mall',
+    collinsStreet: 'Collins Street',
+    swanstonStreet: 'Swanston Street',
+    elizabethStreet: 'Elizabeth Street',
+    queenVictoriaMarket: 'Queen Victoria Market',
+    royalExhibitionBuilding: 'Royal Exhibition Building',
+    melbourneCricketGround: 'Melbourne Cricket Ground',
+    stKildaBeach: 'St Kilda Beach',
+    
+    // 35번 City Circle Tram 정류장 (실제 데이터)
+    waterfrontCity: 'Waterfront City / Docklands Drive',
+    newQuayProm: 'New Quay Promenade / Docklands Drive',
+    centralPier: 'Central Pier / Harbour Esplanade',
+    bourkeStHarbour: 'Bourke Street / Harbour Esplanade',
+    etihadStadium: 'Etihad Stadium / La Trobe Street',
+    docklandsPark: 'Docklands Park / Harbour Esplanade',
+    goodsShed: 'The Goods Shed / Wurundjeri Way',
+    spencerStFlinders: 'Spencer Street / Flinders Street',
+    melbourneAquarium: 'Melbourne Aquarium / Flinders Street',
+    marketStFlinders: 'Market Street / Flinders Street',
+    elizabethStFlinders: 'Elizabeth Street / Flinders Street',
+    swanstonStFlinders: 'Swanston Street / Flinders Street',
+    russellStFlinders: 'Russell Street / Flinders Street',
+    springStFlinders: 'Spring Street / Flinders Street',
+    albertStNicholson: 'Albert Street / Nicholson Street',
+    nicholsonStVictoria: 'Nicholson Street / Victoria Parade',
+    victoriaStLaTrobe: 'Victoria Street / La Trobe Street',
+    exhibitionStLaTrobe: 'Exhibition Street / La Trobe Street',
+    russellStLaTrobe: 'Russell Street / La Trobe Street',
+    swanstonStLaTrobe: 'Swanston Street / La Trobe Street',
+    elizabethStLaTrobe: 'Elizabeth Street / La Trobe Street',
+    queenStLaTrobe: 'Queen Street / La Trobe Street',
+    williamStLaTrobe: 'William Street / La Trobe Street',
+    kingStLaTrobe: 'King Street / La Trobe Street',
+    spencerStLaTrobe: 'Spencer Street / La Trobe Street',
+    parliamentCollins: 'Parliament / Collins Street',
+    exhibitionStFlinders: 'Exhibition Street / Flinders Street',
+    victoriaPoliceCentre: 'Victoria Police Centre / Flinders Street',
+    
+    // 기타 정류장 이름
+    southernCrossStation: 'Southern Cross Station',
+    marvelStadium: 'Marvel Stadium',
+    parliament: 'Parliament',
+    flagstaffGardens: 'Flagstaff Gardens',
+    carltonGardens: 'Carlton Gardens',
+    bourkeStreetMall: 'Bourke Street Mall',
+    collinsStreet: 'Collins Street',
+    swanstonStreet: 'Swanston Street',
+    elizabethStreet: 'Elizabeth Street',
+    queenVictoriaMarket: 'Queen Victoria Market',
+    royalExhibitionBuilding: 'Royal Exhibition Building',
+    melbourneCricketGround: 'Melbourne Cricket Ground',
+    stKildaBeach: 'St Kilda Beach'
   }
 }; 
