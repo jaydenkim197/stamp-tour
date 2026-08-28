@@ -1,0 +1,22 @@
+# Git 및 로그 파일
+.git
+*.log
+
+# Node 프로젝트용 (현재 필요 없다면 유지해도 무방)
+node_modules
+
+# macOS, 에디터 관련
+.DS_Store
+.idea/
+.vscode/
+
+# 테스트/임시 파일
+*.swp
+*.swo
+*.bak
+*.tmp
+
+# 빌드 시 불필요한 항목들
+docker-compose.override.yml
+.env.local
+.env.*.local
