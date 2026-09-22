@@ -9,7 +9,7 @@ Stamp Tour is a Melbourne tram travel-guide web application. It combines station
 ├── src/                            # React frontend
 ├── public/                         # Static frontend assets
 ├── backend/                        # PHP backend, consolidated here in August 2026
-└── legacy/melbourne-map-guide_MVP/ # Preserved early Vite prototype
+└── legacy/melbourne-map-guide_MVP/ # Preserved early Vite frontend prototype
 ```
 
 `backend/` is the canonical backend source. The former standalone backend repository was verified to be an exact duplicate and is retained only as archival history until it is archived or removed.
@@ -35,4 +35,4 @@ Routes in the application cover the home page, station and place views, map brow
 
 ## Project history
 
-The original Melbourne map-guide prototype is preserved under `legacy/melbourne-map-guide_MVP/` for reference. It is not the current application and should not be used as the development entry point.
+The original Melbourne map-guide frontend prototype is preserved under `legacy/melbourne-map-guide_MVP/` for reference. It is not the current application and should not be used as the development entry point.
