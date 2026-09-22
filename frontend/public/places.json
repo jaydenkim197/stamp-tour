@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "Pellegrini's Espresso Bar",
+    "category": "식당",
+    "lat": -37.811979,
+    "lng": 144.967055
+  },
+  {
+    "id": 2,
+    "name": "NGV International",
+    "category": "관광지",
+    "lat": -37.822593,
+    "lng": 144.968939
+  }
+]
