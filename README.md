@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+# Stamp Tour
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Stamp Tour is a Melbourne tram travel-guide web application. It combines station and place browsing, map views, visitor stamps, reviews, a ranking page, multilingual UI support, and route recommendations.
 
-## Available Scripts
+## Repository layout
 
-In the project directory, you can run:
+```text
+.
+├── src/                            # React frontend
+├── public/                         # Static frontend assets
+├── backend/                        # PHP backend, consolidated here in August 2026
+└── legacy/melbourne-map-guide_MVP/ # Preserved early Vite prototype
+```
 
-### `npm start`
+`backend/` is the canonical backend source. The former standalone backend repository was verified to be an exact duplicate and is retained only as archival history until it is archived or removed.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Frontend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+The frontend uses React, React Router, Leaflet, and React Leaflet.
 
-### `npm test`
+```bash
+npm install
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To create a production bundle:
 
-### `npm run build`
+```bash
+npm run build
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Current scope
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Routes in the application cover the home page, station and place views, map browsing, sign-up and login, place reviews, stamp collection, rankings, recent reviews, and route recommendations.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Project history
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The original Melbourne map-guide prototype is preserved under `legacy/melbourne-map-guide_MVP/` for reference. It is not the current application and should not be used as the development entry point.
